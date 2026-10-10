@@ -1,0 +1,45 @@
+/* Scoped to Urbanas and Motos: the X13/Harley presentation is left untouched. */
+#urbanas .models-bg-desktop, #motos .models-bg-desktop,
+#urbanas .models-bg, #motos .models-bg,
+#urbanas .models-photo-mobile, #motos .models-photo-mobile,
+#urbanas .models-mp, #motos .models-mp,
+#urbanas .urban-model-photo, #motos .urban-model-photo,
+#urbanas .urban-model-photo span, #motos .urban-model-photo span,
+#urbanas .urban-model-photo img, #motos .urban-model-photo img {
+  background: transparent; border: 0; outline: 0; box-shadow: none;
+  border-radius: 0; filter: none; mix-blend-mode: normal;
+}
+#urbanas .urban-model-photo, #motos .urban-model-photo {
+  display: block; position: absolute; z-index: 1;
+  left: 50%; top: calc(78% - 36px - var(--photo-floor-offset));
+  width: 90vw; height: auto; aspect-ratio: 4 / 3;
+  transform: translate(-50%, -52%);
+  -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 52%, black 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse closest-side at 50% 52%, black 68%, transparent 100%);
+}
+#urbanas .urban-model-image, #motos .urban-model-image {
+  display: block; position: absolute; left: 50%; top: 52%;
+  width: var(--photo-width); height: auto; aspect-ratio: 16 / 9;
+  transform: translate(-50%, -50%);
+  /* The bitmap has its own transparent margins inside the padded radial mask. */
+  -webkit-mask-image: radial-gradient(ellipse 22% 16% at 62% 16%, black 82%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 18%, black 94%, transparent 100%), linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%);
+  mask-image: radial-gradient(ellipse 22% 16% at 62% 16%, black 82%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 18%, black 94%, transparent 100%), linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%);
+  -webkit-mask-composite: source-over, source-in; mask-composite: add, intersect;
+}
+#urbanas .models-price-label, #motos .models-price-label { text-shadow: 0 1px 4px hsl(var(--foreground)), 0 0 8px hsl(var(--foreground)); }
+#urbanas .urban-model-photo img, #motos .urban-model-photo img {
+  object-fit: contain; object-position: 50% 50%;
+  -webkit-mask-image: none; mask-image: none;
+}
+@media (max-width: 768px) {
+  /* Motos has no specs block below the price; let the section hug its content. */
+  #motos.models { min-height: 0; }
+  #urbanas .models-photo-mobile, #motos .models-photo-mobile { aspect-ratio: 5 / 4; -webkit-mask-image: none; mask-image: none; }
+  #urbanas .models-photo-mobile::before, #motos .models-photo-mobile::before,
+  #urbanas .models-photo-mobile::after, #motos .models-photo-mobile::after { content: none; }
+  #urbanas .urban-model-photo, #motos .urban-model-photo { left: 0; top: 0; width: 100%; height: 100%; aspect-ratio: auto; transform: none; -webkit-mask-image: none; mask-image: none; }
+  #urbanas .urban-model-image, #motos .urban-model-image { inset: 0; width: 100%; height: 100%; aspect-ratio: auto; transform: none; -webkit-mask-image: none; mask-image: none; }
+  #urbanas .urban-model-photo img, #motos .urban-model-photo img { object-fit: cover; object-position: 50% 50%; mix-blend-mode: normal;
+    -webkit-mask-image: radial-gradient(ellipse 52% 50% at 50% 50%, black 55%, transparent 100%);
+    mask-image: radial-gradient(ellipse 52% 50% at 50% 50%, black 55%, transparent 100%); }
+}
